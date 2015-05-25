@@ -3367,7 +3367,20 @@ static inline void pre_stream_item_swap(RedWorker *worker, Stream *stream, Drawa
                 spice_debug("stream %d: fps--%u", index, agent->fps);
             }
         }
-        agent->frames = 1;
+        + else  if （dro_factor < 0.8) {
+        +   if (agent->fps >1) {
+        +       agent->fps-=2;
+        +       spice_debug("stream %d: fps--%u", index, agent->fps);
+        +  }
+       + }
+        + else  if （dro_factor < 0.7) {
+        +   if (agent->fps >1) {
+        +       agent->fps-=3;
+        +       spice_debug("stream %d: fps--%u", index, agent->fps);
+        +  }
+       + }
+        
+       agent->frames = 1;
         agent->drops = 0;
     }
 }
